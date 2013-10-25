@@ -1,0 +1,3 @@
+To Do List(in order of priority):
+
+Link set by gui (Look in ConfigHander init)
