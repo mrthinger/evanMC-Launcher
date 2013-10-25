@@ -1,6 +1,10 @@
 evanMC-Launcher
 ===============
 
-The Open Platform &amp; Open Source 1.6.2 Modpack Launcher
+The Open Platform &amp; Open Source Minecraft Modpack Launcher
 
-In-Progress
+To complile:
+
+You need to make sure you have both
+javafx + JSON.simple
+in your build path
