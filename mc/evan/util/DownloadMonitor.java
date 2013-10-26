@@ -30,7 +30,7 @@ public class DownloadMonitor implements Runnable {
 					System.out.println("Downloading: " + cpt + " % / 100 %");
 				}
 				try {
-					Thread.sleep(2500);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

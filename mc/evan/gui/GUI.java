@@ -52,16 +52,22 @@ public class GUI {
 			primaryStage.setTitle("evanMC Launcher");
 
 			ImageView bg = new ImageView(new Image(
-					LauncherMain.class.getResourceAsStream("assets/background.png")));
+					LauncherMain.class
+							.getResourceAsStream("assets/background.png")));
 
-			//TODO: Make title banner thingy
-			
+			// Banner
+			ImageView banner = new ImageView(
+					new Image(LauncherMain.class
+								.getResourceAsStream("assets/banner.png")));
+
+			banner.setLayoutX(133);
+			banner.setLayoutY(70);
 			
 			
 			// Enter packs here
 			pack = new HashMap<>();
 			pack.put("evanMC", Links.EVANMC);
-			//pack.put("Magi Adventure Pack", Links.MAP);
+			// pack.put("Magi Adventure Pack", Links.MAP);
 
 			JSONHandler.readPacks();
 
@@ -79,7 +85,7 @@ public class GUI {
 				}
 			});
 
-			root.getChildren().addAll(bg, addPack);
+			root.getChildren().addAll(bg, addPack, banner);
 
 			Buttons.init(root, csole, primaryStage);
 
@@ -119,18 +125,20 @@ public class GUI {
 		cb.setLayoutX(centerX - 50);
 		cb.setLayoutY(centerY + 170);
 
-		cb.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+		cb.getSelectionModel().selectedItemProperty()
+				.addListener(new ChangeListener<String>() {
 
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue,
-					String newValue) {
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) {
 
-				int element = cb.getSelectionModel().getSelectedIndex();
+						int element = cb.getSelectionModel().getSelectedIndex();
 
-				choice = values[element];
+						choice = values[element];
 
-			}
-		});
+					}
+				});
 
 		root.getChildren().addAll(cb);
 

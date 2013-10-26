@@ -33,7 +33,7 @@ public class Buttons {
 
 	public static ProgressBar pb;
 	public static Pane csole;
-	
+
 	static double centerX = 225 - 55.5;
 	static double centerY = 225 - 55.5;
 
@@ -51,11 +51,11 @@ public class Buttons {
 						.getResourceAsStream("assets/updatebutton.png")));
 
 		final Rectangle barTop = new Rectangle();
-		
+
 		barTop.setFill(Color.BLACK);
 		barTop.setWidth(800);
 		barTop.setHeight(20);
-		
+
 		fadeQuit = new FadeTransition(Duration.seconds(1), quitbtn);
 		fadeQuit.setFromValue(100);
 		fadeQuit.setToValue(0);
@@ -117,30 +117,31 @@ public class Buttons {
 
 		GUI.makeDragable(primaryStage, csole);
 
-		TextArea ta = TextAreaBuilder.create().prefWidth(800)
-				.prefHeight(580).wrapText(true).build();
+		TextArea ta = TextAreaBuilder.create().prefWidth(800).prefHeight(580)
+				.wrapText(true).build();
 
 		Console console = new Console(ta);
 		PrintStream ps = new PrintStream(console, true);
 		System.setOut(ps);
 		System.setErr(ps);
-		
+
 		ta.setLayoutY(20);
-		
+
 		quitbtn.setX((800 - 111) - 20);
 		quitbtn.setY((600 - 111) - 5);
-		
-		//Progress Bar
+
+		// Progress Bar
 		pb = new ProgressBar();
+		pb.setStyle("-fx-accent: green;");
 		
 		pb.setMinSize(300, 25);
 		pb.setMaxSize(300, 25);
-		
+
 		pb.setLayoutX(800 - 350);
 		pb.setLayoutY(50);
-		
+
 		ProgressListener();
-		
+
 		csole.getChildren().addAll(ta, quitbtn, barTop, pb);
 		Scene sceneConsole = new Scene(csole, 800, 600);
 		primaryStage.setScene(sceneConsole);
@@ -152,9 +153,10 @@ public class Buttons {
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		Future close = ex.submit(callable);
 		try {
-			if (Boolean.parseBoolean(close.get(500, TimeUnit.MILLISECONDS).toString()) == true) {
+			if (Boolean.parseBoolean(close.get(500, TimeUnit.MILLISECONDS)
+					.toString()) == true) {
 				primaryStage.close();
-				Run.updateLauncher(); 
+				Run.updateLauncher();
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -163,23 +165,30 @@ public class Buttons {
 		} catch (TimeoutException e) {
 		}
 	}
-	
-	public static void ProgressListener(){
-		
+
+	public static void ProgressListener() {
+
 		Task<Void> task = new Task<Void>() {
-		      @Override public Void call() {
-		        
-		          updateProgress(FileUtil.cpt, 100);
-		        
-		        return null;
-		      }
-		    };
-		
-	
+			@Override
+			public Void call() {
+				while (Thread.currentThread().isAlive()) {
+				
+					updateProgress(FileUtil.cpt, 100);
+					
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				return null;
+			}
+		};
+
+		Thread t = new Thread(task);
+		t.start();
 		pb.progressProperty().bind(task.progressProperty());
-		
+
 	}
-	
-	
 
 }

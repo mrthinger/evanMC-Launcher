@@ -109,6 +109,7 @@ public class FileUtil {
 			if (!hidden) {
 				DownloadMonitor.running = false;
 				System.out.println("Downloading: 100 % / 100 %");
+				cpt = 0;
 
 			}
 
