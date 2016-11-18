@@ -4,10 +4,6 @@ evanMC-Launcher
 The Open Platform &amp; Open Source Minecraft Modpack Launcher
 
 To complile:
+Make sure to have JSON.simple in your build path
 
-You need to make sure you have both
-javafx + JSON.simple
-in your build path
-
-
-http://www.minecraftforum.net/topic/2059056-/
+Release post: http://www.minecraftforum.net/topic/2059056-/
